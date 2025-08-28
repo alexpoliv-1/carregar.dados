@@ -32,8 +32,7 @@ unir.planilhas <- function(path, remove.duplicates = TRUE) {
   message(paste0(" - ", basename(arquivos), collapse = "\n"))
 
   dfs <- lapply(arquivos, readxl::read_excel)
-  dados <- dplyr::bind_rows(dfs, .id = "arquivo") %>%
-    dplyr::mutate(arquivo = basename(arquivos[as.integer(arquivo)]))
+  dados <- dplyr::bind_rows(dfs)
 
   if (remove.duplicates) {
     dados <- dplyr::distinct(dados)
